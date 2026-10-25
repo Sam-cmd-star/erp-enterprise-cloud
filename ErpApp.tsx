@@ -15,7 +15,6 @@ import { DocumentosPage } from './modules/documentos/pages/DocumentosPage';
 import { ReportesPage } from './modules/reportes/pages/ReportesPage';
 import { AdministracionPage } from './modules/administracion/pages/AdministracionPage';
 
-/** Páginas ya construidas. Los módulos que no aparecen aquí muestran la página provisional. */
 const PAGINAS: Record<string, ReactElement> = {
   dashboard: <DashboardPage />,
   mantenimiento: <MantenimientoPage />,
@@ -28,7 +27,6 @@ const PAGINAS: Record<string, ReactElement> = {
   administracion: <AdministracionPage />,
 };
 
-/** Solo muestra el módulo si el rol de la sesión lo permite. */
 const Protegido: React.FC<{ ruta: string; children: ReactElement }> = ({ ruta, children }) => {
   const { puede } = usePermisos();
   return puede(ruta) ? children : <SinAcceso />;
@@ -37,7 +35,9 @@ const Protegido: React.FC<{ ruta: string; children: ReactElement }> = ({ ruta, c
 export const ErpApp: React.FC = () => (
   <Routes>
     <Route element={<ErpLayout />}>
-      <Route index element={<Navigate to="dashboard" replace />} />
+      {/* 🔴 CAMBIO AQUÍ: Añadimos la barra diagonal / */}
+      <Route index element={<Navigate to="/dashboard" replace />} />
+      
       {ERP_MODULOS.map((modulo) => (
         <Route
           key={modulo.path}
@@ -49,7 +49,9 @@ export const ErpApp: React.FC = () => (
           }
         />
       ))}
-      <Route path="*" element={<Navigate to="dashboard" replace />} />
+      
+      {/* 🔴 CAMBIO AQUÍ: Añadimos la barra diagonal / */}
+      <Route path="*" element={<Navigate to="/dashboard" replace />} />
     </Route>
   </Routes>
 );
