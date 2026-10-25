@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
+import { ruta } from '../../../core/config/navigation';
 import { Plus } from 'lucide-react';
 import { useErp } from '../../../core/hooks/useErp';
 import { Modal } from '../../../core/components/Modal';
@@ -31,10 +32,10 @@ export const InventarioPage: React.FC = () => {
       {aviso && <AvisoFlujo aviso={aviso} onCerrar={() => setAviso(null)} />}
 
       <Routes>
-        <Route index element={<Navigate to="stock" replace />} />
+        <Route index element={<Navigate to={ruta('inventario', 'stock')} replace />} />
         <Route path="stock" element={<StockTab />} />
         <Route path="movimientos" element={<MovimientosTab />} />
-        <Route path="*" element={<Navigate to="stock" replace />} />
+        <Route path="*" element={<Navigate to={ruta('inventario', 'stock')} replace />} />
       </Routes>
 
       {ajustando && (

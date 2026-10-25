@@ -1,4 +1,5 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
+import { ruta } from '../../../core/config/navigation';
 import { useErp } from '../../../core/hooks/useErp';
 import { CadenaFlujo, type PasoFlujo } from '../../../core/components/CadenaFlujo';
 import { EstadoCuenta } from '../../../core/components/operaciones/EstadoCuenta';
@@ -24,12 +25,12 @@ export const VentasPage: React.FC = () => {
     <div className="max-w-6xl space-y-6">
       <CadenaFlujo modulo="ventas" pasos={pasos} />
       <Routes>
-        <Route index element={<Navigate to="cotizaciones" replace />} />
+        <Route index element={<Navigate to={ruta('ventas', 'cotizaciones')} replace />} />
         <Route path="cotizaciones" element={<CotizacionesPage />} />
         <Route path="ordenes" element={<OrdenesVentaPage />} />
         <Route path="facturacion" element={<FacturacionPage />} />
         <Route path="estado-cuenta" element={<EstadoCuenta tipo="Cobrar" />} />
-        <Route path="*" element={<Navigate to="cotizaciones" replace />} />
+        <Route path="*" element={<Navigate to={ruta('ventas', 'cotizaciones')} replace />} />
       </Routes>
     </div>
   );

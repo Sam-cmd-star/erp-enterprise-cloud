@@ -5,7 +5,8 @@ import { usePermisos } from '../core/hooks/usePermisos';
 
 interface Props {
   onNavigate?: () => void;
-  onExit: () => void;
+  /** Si no se indica, no se muestra el botón de salida. */
+  onExit?: () => void;
 }
 
 export const ErpSidebar: React.FC<Props> = ({ onNavigate, onExit }) => {
@@ -80,6 +81,7 @@ export const ErpSidebar: React.FC<Props> = ({ onNavigate, onExit }) => {
         ))}
       </nav>
 
+      {onExit && (
       <div className="p-3 border-t border-slate-200">
         <button
           onClick={onExit}
@@ -89,6 +91,7 @@ export const ErpSidebar: React.FC<Props> = ({ onNavigate, onExit }) => {
           Volver a Nexus
         </button>
       </div>
+      )}
     </aside>
   );
 };

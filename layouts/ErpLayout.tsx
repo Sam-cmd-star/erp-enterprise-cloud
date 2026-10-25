@@ -1,11 +1,10 @@
 import { useState } from 'react';
-import { Outlet, useLocation, useNavigate } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import { ErpSidebar } from './ErpSidebar';
 import { ErpHeader } from './ErpHeader';
-import { ERP_MODULOS } from '../core/config/navigation';
+import { ERP_MODULOS, NEXUS_URL } from '../core/config/navigation';
 
 export const ErpLayout: React.FC = () => {
-  const navigate = useNavigate();
   const { pathname } = useLocation();
   const [menuAbierto, setMenuAbierto] = useState(false);
 
@@ -27,7 +26,7 @@ export const ErpLayout: React.FC = () => {
       >
         <ErpSidebar
           onNavigate={() => setMenuAbierto(false)}
-          onExit={() => navigate('/dashboard')}
+          onExit={NEXUS_URL ? () => window.location.assign(NEXUS_URL) : undefined}
         />
       </div>
 

@@ -4,7 +4,15 @@ import {
   type LucideIcon,
 } from 'lucide-react';
 
-export const ERP_BASE = '/erp-enterprise-cloud';
+/**
+ * Prefijo de todas las direcciones del ERP.
+ * - Repositorio independiente (por defecto): vacío, el ERP vive en la raíz: /dashboard, /ventas...
+ * - Si el ERP se monta dentro de otra aplicación, se define VITE_ERP_BASE=/erp-enterprise-cloud
+ */
+export const ERP_BASE: string = String(import.meta.env.VITE_ERP_BASE ?? '').replace(/\/+$/, '');
+
+/** Dirección de Nexus, para el botón "Volver a Nexus". Si no se define, el botón no se muestra. */
+export const NEXUS_URL: string = String(import.meta.env.VITE_NEXUS_URL ?? '');
 
 export interface ErpSubmodulo {
   path: string;
